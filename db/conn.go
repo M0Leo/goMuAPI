@@ -12,6 +12,6 @@ func ConnectDB(dsn string) *gorm.DB {
 		panic(err)
 	}
 
+	db.AutoMigrate(&Song{})
 	return db
-
 }

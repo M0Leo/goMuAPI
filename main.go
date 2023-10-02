@@ -14,7 +14,16 @@ func main() {
 		log.Fatal(err)
 	}
 
-	db := db.ConnectDB(os.Getenv("DSN"))
+	conn := db.ConnectDB(os.Getenv("DSN"))
 
+	s := db.SongService{DB: conn}
+	s.CreateSong(
+		db.SongData{
+			Title: "Metalnigus",
+			Artist: "Edge",
+			Genre: "Metal",
+			Year: 2012,
+		},
+	)
 	fmt.Printf("Api is now working!!!")
 }
