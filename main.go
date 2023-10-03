@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"goMuAPI/main/db"
 	"log"
 	"os"
@@ -14,6 +13,11 @@ func main() {
 		log.Fatal(err)
 	}
 
-	conn := db.ConnectDB(os.Getenv("DSN"))
-	fmt.Printf("Api is now working!!!")
+	store, err := db.NewMySQLStore(os.Getenv("DSN"))
+	if err != nil {
+		log.Fatal(err)
+	}
+	
+	server := NewAPIServer(":8080", store)
+	server.Run()
 }
