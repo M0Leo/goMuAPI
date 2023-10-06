@@ -7,7 +7,7 @@ import (
 
 type SongService interface {
 	CreateSong(*Song) error
-	GetSongByID(id uint) (*Song, error)
+	GetSongByID(id int) (*Song, error)
 	GetSongs() ([]*Song, error)
 }
 
@@ -45,7 +45,7 @@ func (store *MySQLStore) CreateSong(song *Song) error {
 	return nil
 }
 
-func (store *MySQLStore) GetSongByID(id uint) (*Song, error) {
+func (store *MySQLStore) GetSongByID(id int) (*Song, error) {
 	var song Song
 	if err := store.db.First(&song, id).Error; err != nil {
 		return nil, err
